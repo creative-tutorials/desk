@@ -1,72 +1,102 @@
-import { Folder, Download, Zap, HelpCircle, Trash2, LogIn } from "lucide-react";
-import Link from "next/link";
+import { Clock, FileText, Database } from "lucide-react";
+import { Sidebar } from "@/components/sidebar/sidebar";
+import { WelcomeText } from "@/components/layouts/welcome-text";
+import { Submissions } from "@/components/layouts/data/submission-table";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 export default function Home() {
   return (
     <main>
-      <div
-        id="sidebar"
-        className="fixed top-0 left-0 h-full w-full max-w-[16rem] border-r border-zinc-800 bg-zinc-950"
-      >
-        <div id="sidebar-content" className="p-5">
-          <div id="logo">
-            <Link href="/">
-              <div id="logo--text" className="flex items-center gap-2">
-                <span className="text-xl font-bold text-white">Desk</span>
-                <sup className="text-xs text-slate-200">beta</sup>
+      {/* ====== Sidebar ====== */}
+      <Sidebar />
+      <div id="sections" className="flex w-full flex-col gap-5 p-5">
+        <section id="recently" className="w-full">
+          <div
+            id="content-canvas"
+            className="flex flex-col gap-4 md:ml-64 lg:ml-64"
+          >
+            <WelcomeText />
+            <div id="recently-canvas">
+              <hgroup>
+                <h2 className="flex items-center gap-2 text-sm text-zinc-400">
+                  <Clock className="h-3 w-3 stroke-zinc-400" /> Recently created
+                </h2>
+              </hgroup>
+              <div
+                id="recently-list"
+                className="my-2 flex w-full items-center justify-center bg-transparent"
+              >
+                <Carousel
+                  className="w-full max-w-4xl"
+                  opts={{
+                    loop: true,
+                    align: "start",
+                  }}
+                >
+                  <CarouselContent className="-ml-1">
+                    {Array.from({ length: 20 }).map((_, index) => (
+                      <CarouselItem
+                        key={index}
+                        className="pl-1 md:basis-1/2 lg:basis-1/3"
+                      >
+                        <div
+                          id="list"
+                          className="relative rounded-lg bg-zinc-900 p-4 pt-10"
+                        >
+                          <div
+                            id="list-cover"
+                            className="absolute left-0 top-0 w-full rounded-t-lg bg-[url('/desk.avif')] bg-cover bg-center p-8"
+                          >
+                            <FileText className="absolute -bottom-4 left-3 h-8 w-8 stroke-zinc-600" />
+                          </div>
+                          <div id="list-content" className="mt-14">
+                            <hgroup>
+                              <h3 className="text-base font-medium text-zinc-400">
+                                {index + 1}
+                              </h3>
+                            </hgroup>
+                            <div id="bottom-list-content">
+                              <div id="profile"></div>
+                              <div id="bottom-list-content-text">
+                                <p className="text-xs text-zinc-400">
+                                  Aug, 24, 2023
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious className="border-zinc-800 bg-zinc-900 text-zinc-400 hover:bg-zinc-800 hover:text-zinc-100" />
+                  <CarouselNext className="border-zinc-800 bg-zinc-900 text-zinc-400 hover:bg-zinc-800 hover:text-zinc-100" />
+                </Carousel>
               </div>
-            </Link>
+            </div>
           </div>
-          <div id="sideabr-links" className="flex flex-col gap-4">
-            <Link
-              href="/open"
-              id="link"
-              className="flex items-center justify-between gap-2 bg-zinc-900 p-2 rounded-md"
-            >
-              <div id="link--text" className="flex items-center gap-2">
-                <Folder className="h-4 w-4" stroke="#fff" />
-                <span className="text-sm text-slate-200">Open</span>
-              </div>
-              <div id="link--shortcut">
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-zinc-800 bg-zinc-900 px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  <span className="text-xs">⌘</span>O
-                </kbd>
-              </div>
-            </Link>
-            <Link
-              href="#"
-              id="link"
-              className="flex items-center justify-between gap-2 bg-zinc-900 p-2 rounded-md"
-            >
-              <div id="link--text" className="flex items-center gap-2">
-                <Download className="h-4 w-4" stroke="#fff" />
-                <span className="text-sm text-slate-200">Download</span>
-              </div>
-              <div id="link--shortcut">
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-zinc-800 bg-zinc-900 px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  <span className="text-xs">⌘</span>D
-                </kbd>
-              </div>
-            </Link>
-            <Link
-              href="#"
-              id="link"
-              className="flex items-center justify-between gap-2 bg-zinc-900 p-2 rounded-md"
-            >
-              <div id="link--text" className="flex items-center gap-2">
-                <Zap className="h-4 w-4" stroke="#fff" />
-                <span className="text-sm text-slate-200">Command palette</span>
-              </div>
-              <div id="link--shortcut">
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-zinc-800 bg-zinc-900 px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  <span className="text-xs">⌘</span>K
-                </kbd>
-              </div>
-            </Link>
+        </section>
+        <section id="submission" className="w-full">
+          <div
+            id="submission-canvas"
+            className="flex flex-col gap-4 md:ml-64 lg:ml-64"
+          >
+            <div id="submission-content">
+              <hgroup>
+                <h2 className="flex items-center gap-2 text-sm text-zinc-400">
+                  <Database className="h-3 w-3 stroke-zinc-400" /> Submission
+                </h2>
+              </hgroup>
+              <Submissions />
+            </div>
           </div>
-        </div>
+        </section>
       </div>
-      <section id="content"></section>
     </main>
   );
 }
