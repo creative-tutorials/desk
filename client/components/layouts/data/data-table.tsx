@@ -99,7 +99,7 @@ export function DataTable<TData, TValue>({
                 return (
                   <DropdownMenuCheckboxItem
                     key={column.id}
-                    className="capitalize text-zinc-400 hover:bg-zinc-900 hover:text-zinc-100"
+                    className="capitalize text-zinc-400 focus:bg-zinc-900 focus:text-zinc-100"
                     checked={column.getIsVisible()}
                     onCheckedChange={(value) =>
                       column.toggleVisibility(!!value)

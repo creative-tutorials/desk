@@ -1,16 +1,17 @@
 import Link from "next/link";
-import { SidebarLogo } from "./logo";
 import { SidebarDropdown } from "./dropdown";
+import { SidebarLogo } from "./logo";
 import {
-  Folder,
   Blocks,
-  Search,
+  CircleHelp,
+  FileText,
+  Folder,
   Home,
   Inbox,
+  Palette,
+  Search,
   Settings,
-  FileText,
   Trash2,
-  CircleHelp,
 } from "lucide-react";
 
 export function Sidebar() {
@@ -123,6 +124,21 @@ export function Sidebar() {
                 />
                 <span className="text-sm text-zinc-400 group-hover:text-white">
                   Components
+                </span>
+              </div>
+            </Link>
+            <Link
+              href="/templates"
+              id="link"
+              className="group flex items-center justify-between gap-2 rounded-md p-1 px-2 transition-all hover:bg-zinc-900"
+            >
+              <div id="link--text" className="flex items-center gap-2">
+                <Palette
+                  className="h-4 w-4 stroke-zinc-400 group-hover:stroke-white"
+                  stroke="#000"
+                />
+                <span className="text-sm text-zinc-400 group-hover:text-white">
+                  Templates
                 </span>
               </div>
             </Link>

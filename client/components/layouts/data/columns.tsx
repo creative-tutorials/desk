@@ -45,7 +45,7 @@ export const columns: ColumnDef<Response>[] = [
       return (
         <Button
           variant="ghost"
-          className="text-zinc-400 hover:bg-zinc-900 hover:text-zinc-100 hover:shadow-xl"
+          className="text-zinc-400 hover:shadow-xl focus:bg-zinc-900 focus:text-zinc-100"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Username
@@ -82,13 +82,13 @@ export const columns: ColumnDef<Response>[] = [
         <DropdownMenuContent className="round-md border border-zinc-900 bg-zinc-950 shadow-lg">
           <DropdownMenuLabel className="text-white">Actions</DropdownMenuLabel>
           <DropdownMenuSeparator className="bg-zinc-900" />
-          <DropdownMenuItem className="text-zinc-400 hover:bg-zinc-900 hover:text-zinc-100">
+          <DropdownMenuItem className="text-zinc-400 focus:bg-zinc-900 focus:text-zinc-100">
             Approve
           </DropdownMenuItem>
-          <DropdownMenuItem className="text-zinc-400 hover:bg-zinc-900 hover:text-zinc-100">
+          <DropdownMenuItem className="text-zinc-400 focus:bg-zinc-900 focus:text-zinc-100">
             Reject
           </DropdownMenuItem>
-          <DropdownMenuItem className="text-zinc-400 hover:bg-zinc-900 hover:text-zinc-100">
+          <DropdownMenuItem className="text-zinc-400 focus:bg-zinc-900 focus:text-zinc-100">
             Delete
           </DropdownMenuItem>
         </DropdownMenuContent>

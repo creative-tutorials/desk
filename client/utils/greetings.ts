@@ -19,7 +19,7 @@ export function getGreeting() {
 
   if (hour < 12) {
     return greeting[0];
-  } else if (hour < 18) {
+  } else if (hour < 17) {
     return greeting[1];
   } else {
     return greeting[2];
