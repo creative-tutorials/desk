@@ -1,0 +1,107 @@
+import { Callout } from "nextra/components";
+import { Tabs } from "nextra/components";
+
+# Generating Code
+
+You've come this far 🫡 and we must congratulate you. You've successfully created a form with Desk. Now, let's move on to the next step and generate the code for your form.
+
+## A word from the creators
+
+We've heard your complaints about the following:
+
+- Lack of documentation
+- Lack of support for other frameworks
+- No support for HTML devs
+
+We understand your frustration and we're sorry for the inconvenience. We're here to help you and we're committed to making Desk the best form builder for your next application. Whilst looking into other frameworks support in the near future, we're exicted to add that Desk for HTML developers is available but still in beta. We'll be releasing it soon.
+
+Soon you'll be able to paste your generated code into your HTML file and start using your form. And here's the exciting part... It supports Tailwind CSS, and Shadcn UI out of the box 😎. So you can show off that awesome form to your friends with just a few clicks.
+
+## Working with the code for React Devs
+
+Grab your coffee and let's get started.
+
+1. Click the `Generate Code` button on your form.
+2. Copy the code.
+3. Initialize the `@shadcn/ui` package. You can do this by following the official [docs](https://ui.shadcn.com/docs).
+
+### Next.js
+
+If you use Next.js you can follow the official [docs](https://ui.shadcn.com/docs/installation/next)
+
+### React (Manual)
+
+If you run your application with `create-react-app` or `vite`, you can follow the official [docs](https://ui.shadcn.com/docs/installation/manual)
+
+<Callout type="info" emoji="ℹ️">
+  Ensure you have shadcn/ui and tailwindcss installed in your project.
+</Callout>
+
+## Required Components
+
+Now that you have the code on your clipboard, and you have shadcn/ui installed, along with tailwindcss, next step is to add our required components to your application.
+
+By default we don't install any components for you, but you can do it yourself. Below is a list of required components.
+
+### Fields
+
+- String
+  - Input: If you have a string field you should use the `Input` component. Let's get started. See the [Input](https://ui.shadcn.com/docs/components/input) section for more information.
+
+Installation:
+
+```bash
+  npx shadcn@latest add input
+```
+
+Usage:
+
+```jsx
+import { Input } from "@/components/ui/input";
+```
+
+- Number
+  - Input: If you have a number field you should use the `Input` component but with the `type` prop set to `number`. Let's get started.
+
+Installation:
+
+```bash
+  npx shadcn@latest add input
+```
+
+Usage:
+
+```jsx
+import { Input } from "@/components/ui/input";
+
+<Input type="number" />;
+```
+
+- Boolean
+  - Switch: If you have a boolean field you should use the `Switch` component. Let's get started. See the [Switch](https://ui.shadcn.com/docs/components/switch) section for more information.
+
+Installation:
+
+```bash
+  npx shadcn@latest add switch
+```
+
+Usage:
+
+```jsx
+import { Switch } from "@/components/ui/switch";
+```
+
+- Date
+  - DatePicker: If you have a date field you should use the `DatePicker` component. Let's get started.
+
+Installation:
+
+The date picker is a bit more complicated than the other components. You need to install the `date-fns` package. I advise you follow the official [docs](https://ui.shadcn.com/docs/components/date-picker)
+
+- Enum
+  - Combobox: If you have an enum field you should use the `Combobox` component. Let's get started. See the [Combobox](https://ui.shadcn.com/docs/components/combobox) section for more information.
+
+Installation:
+
+Just like the `date-picker`, the combobox is a bit more complicated than the other components. I advise you follow the official [docs](https://ui.shadcn.com/docs/components/combobox)

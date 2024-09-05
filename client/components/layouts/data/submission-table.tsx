@@ -1,15 +1,3 @@
-import { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { columns } from "./columns";
 import { DataTable } from "./data-table";
 import { Response } from "@/types/TResponse";
@@ -49,7 +37,7 @@ async function getData(): Promise<Response[]> {
   ];
 }
 
-export async function Submissions() {
+export async function SubmissionsTable() {
   const data = await getData();
 
   return (

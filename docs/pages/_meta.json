@@ -1,0 +1,28 @@
+{
+  "index": "Introduction",
+  "code": "Code",
+  "introduction": {
+    "title": "Introduction",
+    "type": "page",
+    "href": "/"
+  },
+  "company": {
+    "title": "Company",
+    "type": "menu",
+    "items": {
+      "about": {
+        "title": "About",
+        "href": "/about"
+      },
+      "contact": {
+        "title": "Contact Us",
+        "href": "mailto:hi@example.com"
+      }
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "type": "page",
+    "href": "/blog"
+  }
+}

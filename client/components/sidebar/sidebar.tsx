@@ -81,7 +81,7 @@ export function Sidebar() {
               </div>
             </Link>
             <Link
-              href="#"
+              href="/inbox"
               id="link"
               className="group flex items-center justify-between gap-2 rounded-md p-1 px-2 transition-all hover:bg-zinc-900"
             >
@@ -94,9 +94,14 @@ export function Sidebar() {
                   Inbox
                 </span>
               </div>
+              <div id="link--shortcut">
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-zinc-800 bg-zinc-900 px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  <span className="text-xs">⌘</span>I
+                </kbd>
+              </div>
             </Link>
             <Link
-              href="#"
+              href="/account/settings"
               id="link"
               className="group flex items-center justify-between gap-2 rounded-md p-1 px-2 transition-all hover:bg-zinc-900"
             >
@@ -109,11 +114,16 @@ export function Sidebar() {
                   Settings
                 </span>
               </div>
+              <div id="link--shortcut">
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-zinc-800 bg-zinc-900 px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  <span className="text-xs">⌘</span>S
+                </kbd>
+              </div>
             </Link>
           </div>
           <div id="sideabr-links" className="flex flex-col gap-2">
             <Link
-              href="#"
+              href="/components"
               id="link"
               className="group flex items-center justify-between gap-2 rounded-md p-1 px-2 transition-all hover:bg-zinc-900"
             >
@@ -143,7 +153,7 @@ export function Sidebar() {
               </div>
             </Link>
             <Link
-              href="#"
+              href="/docs"
               id="link"
               className="group flex items-center justify-between gap-2 rounded-md p-1 px-2 transition-all hover:bg-zinc-900"
             >
@@ -158,7 +168,7 @@ export function Sidebar() {
               </div>
             </Link>
             <Link
-              href="#"
+              href="/recycle-bin"
               id="link"
               className="group flex items-center justify-between gap-2 rounded-md p-1 px-2 transition-all hover:bg-zinc-900"
             >

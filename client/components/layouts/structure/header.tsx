@@ -1,12 +1,14 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { HeaderButtons } from "./header/buttons";
+
 export function Header() {
   return (
-    <header className="fixed left-0 top-0 z-50 flex w-full items-center justify-between bg-zinc-950 p-4 px-8">
+    <header className="fixed left-0 top-0 z-50 flex w-full items-center justify-between bg-zinc-950/50 p-4 px-8 backdrop-blur">
       <div id="header-cols" className="flex items-center gap-6">
         <div id="col-left">
-          <Link href="/">
-            <h4 className="text-lg font-semibold text-white">Logo</h4>
+          <Link href="/" className="flex items-center gap-1">
+            <span className="text-xl font-bold text-white">Desk</span>{" "}
+            <sup className="text-xs text-slate-200">beta</sup>
           </Link>
         </div>
         <div id="col-right">
@@ -46,12 +48,7 @@ export function Header() {
           </ul>
         </div>
       </div>
-      <div id="header-end">
-        <Button variant={"link"} className="text-muted-foreground">
-          Contact
-        </Button>
-        <Button>Sign in</Button>
-      </div>
+      <HeaderButtons />
     </header>
   );
 }

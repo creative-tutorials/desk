@@ -1,6 +1,15 @@
 "use client";
 
+import { useState } from "react";
+import { getAPIUrl } from "@/utils/urlUtils";
+import axios from "axios";
+import { useAuth, useUser, useClerk } from "@clerk/nextjs";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 import Avvvatars from "avvvatars-react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuGroup,
@@ -18,24 +27,73 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import {
   Plus,
   ChevronDown,
   User,
   Users,
   CreditCard,
   Keyboard,
-  LifeBuoy,
-  Cloud,
   LogOut,
-  Github,
-  UserPlus,
-  Mail,
-  MessageSquare,
-  PlusCircle,
   Settings,
 } from "lucide-react";
+import { useUserInfo } from "@/utils/user-info";
 
 export function SidebarDropdown() {
+  const queryClient = useQueryClient();
+  const { isSignedIn, isLoaded, userId, getToken } = useAuth();
+  const { user } = useUser();
+  const { signOut } = useClerk();
+  const [name, setName] = useState("");
+  const userInfo = useUserInfo(isSignedIn, isLoaded, user);
+
+  const createForm = async (name: string) => {
+    try {
+      const token = await getToken();
+      const url = getAPIUrl("form");
+      const res = await axios.post(
+        url,
+        {
+          fname: name,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+            userid: userId,
+          },
+        },
+      );
+
+      if (res.status === 201) return res.data;
+
+      // handle error
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  const mutation = useMutation({
+    mutationFn: createForm,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["forms"] });
+      toast.success("Form created successfully"); // display a success message
+      setName(""); // reset the field after successful submission
+    },
+    onError: (err) => {
+      console.error(err);
+      toast.error(err.message);
+    },
+  });
+
   return (
     <div
       id="sidebar-dropdown"
@@ -48,10 +106,12 @@ export function SidebarDropdown() {
         >
           <div id="dropdown-col-left" className="flex items-center gap-2">
             <div id="dropdown-image">
-              <Avvvatars value="tim@apple.com" size={24} />
+              <Avvvatars value={userInfo?.email as string} size={24} />
             </div>
             <div id="dropdown-text" className="flex items-center gap-1">
-              <span className="text-xs text-zinc-400">timi@apple.com</span>
+              <span className="text-xs text-zinc-400">
+                {userInfo?.email.split("@")[0]}
+              </span>
               <span>
                 <ChevronDown className="h-4 w-4 stroke-zinc-400 transition-all group-data-[state=open]:rotate-180" />
               </span>
@@ -104,7 +164,10 @@ export function SidebarDropdown() {
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator className="bg-zinc-900" />
-          <DropdownMenuItem className="text-white focus:bg-zinc-900 focus:text-white">
+          <DropdownMenuItem
+            className="text-white focus:bg-zinc-900 focus:text-white"
+            onClick={() => signOut({ redirectUrl: "/sign-in" })}
+          >
             <LogOut className="mr-2 h-4 w-4" />
             <span>Log out</span>
             <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
@@ -112,21 +175,58 @@ export function SidebarDropdown() {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <div
-              id="dropdown-col-right"
-              className="group cursor-pointer select-none rounded-full bg-zinc-900 p-1 transition-all hover:bg-zinc-800/30"
-            >
-              <Plus className="h-4 w-4 stroke-zinc-400 transition-all group-hover:stroke-zinc-300" />
+      <Dialog>
+        <DialogTrigger>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div
+                  id="dropdown-col-right"
+                  className="group cursor-pointer select-none rounded-full bg-zinc-900 p-1 transition-all hover:bg-zinc-800/30"
+                >
+                  <Plus className="h-4 w-4 stroke-zinc-400 transition-all group-hover:stroke-zinc-300" />
+                </div>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>New form</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </DialogTrigger>
+        <DialogContent className="border border-zinc-900 bg-zinc-950 sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle className="text-white">Create new form</DialogTitle>
+            <DialogDescription>
+              Create a new form to start collecting data.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="">
+              <Label
+                htmlFor="name"
+                className="text-right text-muted-foreground"
+              >
+                Name
+              </Label>
+              <Input
+                id="name"
+                type="text"
+                className="col-span-3 border-zinc-800 bg-zinc-950 text-white focus:ring-offset-slate-600"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <span className="text-xs text-muted-foreground">
+                Give your form a name.
+              </span>
             </div>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>New form</p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+          </div>
+          <DialogFooter>
+            <Button type="submit" onClick={() => mutation.mutate(name)}>
+              Create form
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

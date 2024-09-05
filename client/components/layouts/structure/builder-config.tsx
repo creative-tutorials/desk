@@ -1,21 +1,24 @@
-import { TempTable } from "./template-content/table";
-import { ContentText } from "./template-content/content-text";
+import { EditorTab } from "./form/editor";
+import { ContentText } from "./form/content-text";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { PreviewTab } from "./form/preview";
 
-export function TemplateContent() {
+export function BuilderConfig() {
   return (
-    <section className="mt-20 flex flex-col gap-14 p-8">
+    <section className="mt-14 flex flex-col gap-14 p-8">
       <ContentText />
       <div id="tabs">
         <Tabs defaultValue="editor" className="w-auto">
-          <TabsList>
+          <TabsList className="bg-zinc-900">
             <TabsTrigger value="editor">Editor</TabsTrigger>
             <TabsTrigger value="preview">Preview</TabsTrigger>
           </TabsList>
           <TabsContent value="editor">
-            <TempTable />
+            <EditorTab />
           </TabsContent>
-          <TabsContent value="preview">Change your password here.</TabsContent>
+          <TabsContent value="preview">
+            <PreviewTab />
+          </TabsContent>
         </Tabs>
       </div>
     </section>
