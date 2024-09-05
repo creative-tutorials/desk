@@ -12,6 +12,26 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Desk || Form builder for your next application",
   description: "Open source alternative to Google Forms",
+  applicationName: "Desk",
+  keywords: [
+    "Next.js",
+    "Tailwind",
+    "Shadcn",
+    "Form Builder",
+    "Desk",
+    "Build forms",
+  ],
+  openGraph: {
+    title: "Desk || Form builder for your next application",
+    description: "Open source alternative to Google Forms",
+    url: "https://desk.vercel.app",
+    siteName: "Desk",
+    images: [
+      {
+        url: "https://desk.vercel.app/desk.avif",
+      },
+    ],
+  },
 };
 
 const clerkPubKey = env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
