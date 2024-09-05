@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Desk || Form builder for your next application",
     description: "Open source alternative to Google Forms",
-    url: "https://desk.vercel.app",
+    url: "https://desk-xyz.vercel.app",
     siteName: "Desk",
     images: [
       {
