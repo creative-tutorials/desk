@@ -25,6 +25,7 @@ export function EditorTab() {
   const { isPending, isError, data, error } = useQuery<DataProp[]>({
     queryKey: ["fields"],
     queryFn: () => fetchFields(isSignedIn, isLoaded, userId, getToken),
+    retry: 2,
   });
 
   if (isPending)
